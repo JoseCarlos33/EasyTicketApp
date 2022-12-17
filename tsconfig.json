@@ -9,7 +9,9 @@
     "baseUrl": "./",
     "paths": {
       "*": ["src/*"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@screens/*": ["src/screens/*"],
+      "@utils/*": ["src/utils/*"],
     }                               /* Skip type checking all .d.ts files. */
   }
 }
