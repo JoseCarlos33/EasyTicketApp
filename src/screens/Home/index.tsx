@@ -1,6 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
-import HeaderHome from '../../components/molecules/HeaderHome';
+import HeaderHome from '@components/molecules/HeaderHome';
 import { Container } from './styles';
 
 function Home() {
