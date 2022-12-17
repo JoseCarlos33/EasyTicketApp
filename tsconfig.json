@@ -5,6 +5,17 @@
     /* Visit https://aka.ms/tsconfig.json to read more about this file */
 
     /* Completeness */
-    "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+      "src/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@screens/*": ["src/screens/*"],
+      "@utils/*": ["src/utils/*"],
+    },
+    "typeRoots": ["node_modules/@types", "./src/types"],
+    "types": [
+      "@types/styled-components-react-native"
+    ]
   }
 }
