@@ -1,12 +1,15 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import Home from '../screens/Home';
-import Test from '@screens/Test';
+import Home from 'src/screens/Home';
+import Test from 'src/screens/Test';
 const { Navigator, Screen } = createNativeStackNavigator();
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
+import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import { theme } from '@utils/theme';
+
 Icon.loadFont()
+IconMaterial.loadFont()
 
 const Tab = createMaterialBottomTabNavigator();
 const teste = 5;
@@ -26,31 +29,9 @@ export function TapRoutes() {
         options={{
           tabBarLabel: 'Home',
           // tabBarColor: '#009387',
-          tabBarBadge: teste,
+          // tabBarBadge: teste,
           tabBarIcon: ({ color }) => (
             <Icon name="ios-home" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Notifications"
-        component={Test}
-        options={{
-          tabBarLabel: 'Updates',
-          // tabBarColor: '#1f65ff',
-          tabBarIcon: ({ color }) => (
-            <Icon name="ios-notifications" color={color} size={26} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Home}
-        options={{
-          tabBarLabel: 'Profile',
-          // tabBarColor: '#694fad',
-          tabBarIcon: ({ color }) => (
-            <Icon name="ios-person" color={color} size={26} />
           ),
         }}
       />
@@ -61,7 +42,31 @@ export function TapRoutes() {
           tabBarLabel: 'Explore',
           // tabBarColor: '#d02860',
           tabBarIcon: ({ color }) => (
-            <Icon name="ios-aperture" color={color} size={26} />
+            <IconMaterial name="explore" color={color} size={27} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Favoritos"
+        component={Test}
+        options={{
+          tabBarLabel: 'Favoritos',
+          // tabBarColor: '#1f65ff',
+          tabBarIcon: ({ color, focused }) => focused ? (
+            <IconMaterial name="favorite" color={color} size={27} />
+          ) : (
+            <IconMaterial name="favorite-border" color={color} size={27} />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="Perfil"
+        component={Home}
+        options={{
+          tabBarLabel: 'Perfil',
+          // tabBarColor: '#694fad',
+          tabBarIcon: ({ color }) => (
+            <Icon name="ios-person" color={color} size={26} />
           ),
         }}
       />
