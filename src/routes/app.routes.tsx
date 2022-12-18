@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import { theme } from '@utils/theme';
 import EventsList from 'src/screens/EventsList';
+import EventDetail from 'src/screens/EventDetail';
 
 Icon.loadFont()
 IconMaterial.loadFont()
@@ -22,7 +23,6 @@ export function TapRoutes() {
       shifting={true}
       labeled={true}
       activeColor={theme.color.white}
-
     >
       <Tab.Screen
         name="Home"
@@ -39,6 +39,7 @@ export function TapRoutes() {
       <Tab.Screen
         name="Explore"
         component={EventsList}
+        initialParams={{ isSearchInputFocused: false }}
         options={{
           tabBarLabel: 'Explore',
           // tabBarColor: '#d02860',
@@ -85,13 +86,13 @@ export function AppRoutes() {
       }}
     >
       <Screen
-        name="Home1"
+        name="TabScreens"
         component={TapRoutes}
         options={{ headerShown: false }}
       />
       <Screen
-        name="Home2"
-        component={Home}
+        name="EventDetail"
+        component={EventDetail}
       />
     </Navigator>
   )

@@ -50,7 +50,7 @@ export const Subtitle = styled.Text`
 `;
 
 export const DayTitle = styled.Text`
-  font-size: ${RFValue(14)}px;
+  font-size: ${RFValue(12)}px;
   font-family: Inter-SemiBold;
   color: ${theme.color.blue}
 `;

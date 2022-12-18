@@ -15,8 +15,12 @@ import {
 import DefaultEventCard from '../DefaultEventCard';
 import { allEvents } from 'src/mocks/allEvents';
 import { TouchableOpacity, View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 function TopSellEvents() {
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
+
   return (
     <Container>
       <Title>
@@ -40,7 +44,9 @@ function TopSellEvents() {
       </ListContent>
       <BottomContent>
         <TouchableOpacity
-          onPress={() => { }}
+          onPress={() => navigation.navigate('TabScreens', {
+            screen: 'Explore',
+          })}
           style={{
             padding: 21,
           }}

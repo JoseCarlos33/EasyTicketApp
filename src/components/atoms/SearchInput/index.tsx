@@ -14,20 +14,32 @@ interface ControlledSearchInputProps {
   name?: string;
   placeholder?: string;
   disabled?: boolean;
+  isFocused?: boolean;
   onChangeText?: (...event: any[]) => void;
   value?: string;
   handleFilterResults?: () => void;
+  onFocus?: () => void;
+  inputRef?: any;
 }
 
 function SearchInput({
   placeholder,
   onChangeText,
   value,
-  handleFilterResults
+  handleFilterResults,
+  onFocus,
+  inputRef,
+  isFocused
 }: ControlledSearchInputProps) {
+  
+  if(isFocused){
+    inputRef?.current?.focus()
+  }
+
   return (
     <Input>
       <InputField
+        ref={inputRef}
         placeholder={placeholder}
         value={value}
         onChangeText={onChangeText}
@@ -35,6 +47,7 @@ function SearchInput({
         returnKeyType="send"
         autoCapitalize='none'
         autoCorrect={false}
+        onFocus={onFocus}
       />
       <InputButton
         testID="input-button"
@@ -48,10 +61,13 @@ function SearchInput({
 }
 
 export default function ControlledSearchInput({
+  inputRef,
   placeholder = "",
   disabled = false,
+  isFocused = false,
   name = "",
-  handleFilterResults = () => { }
+  handleFilterResults = () => { },
+  onFocus = () => { },
 }: ControlledSearchInputProps) {
 
   const { control } = useFormContext();
@@ -62,17 +78,20 @@ export default function ControlledSearchInput({
       rules={{
         required: true,
       }}
-      render={({ field: { onChange, onBlur, value } }) => (
+      name={name}
+      render={({ field: { onChange, onBlur, value} }) => (
         <SearchInput
+          inputRef={inputRef}
           placeholder={placeholder}
           disabled={disabled}
           onChangeText={onChange}
           value={value}
           name={name}
           handleFilterResults={handleFilterResults}
+          onFocus={onFocus}
+          isFocused={isFocused}
         />
       )}
-      name={name}
     />
   )
 }
