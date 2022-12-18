@@ -7,6 +7,7 @@ import { createMaterialBottomTabNavigator } from '@react-navigation/material-bot
 import Icon from 'react-native-vector-icons/Ionicons';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import { theme } from '@utils/theme';
+import EventsList from 'src/screens/EventsList';
 
 Icon.loadFont()
 IconMaterial.loadFont()
@@ -37,7 +38,7 @@ export function TapRoutes() {
       />
       <Tab.Screen
         name="Explore"
-        component={Test}
+        component={EventsList}
         options={{
           tabBarLabel: 'Explore',
           // tabBarColor: '#d02860',
@@ -61,7 +62,7 @@ export function TapRoutes() {
       />
       <Tab.Screen
         name="Perfil"
-        component={Home}
+        component={Test}
         options={{
           tabBarLabel: 'Perfil',
           // tabBarColor: '#694fad',

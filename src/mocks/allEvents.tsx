@@ -12,7 +12,7 @@ export const allEvents = [
     isTopSell: true
   },
   {
-    id: 7,
+    id: 5,
     img: Img3,
     title: "Mulheres na liderança",
     day: "25/04/2023",
@@ -20,7 +20,7 @@ export const allEvents = [
     isTopSell: true
   },
   {
-    id: 5,
+    id: 6,
     img: Img2,
     title: "Destaque-se no mercado de trabalho",
     day: "10/01/2023",
@@ -28,12 +28,43 @@ export const allEvents = [
     isTopSell: true
   },
   {
-    id: 6,
+    id: 7,
     img: Img3,
     title: "Multidisciplinaridade na tecnologia",
     day: "15/02/2023",
     type: "Acadêmico",
     isTopSell: true
   },
-  
+  {
+    id: 8,
+    img: Img1,
+    title: "Marketing para empresas",
+    day: "27/01/2023",
+    type: "Empresarial",
+    isTopSell: false
+  },
+  {
+    id: 9,
+    img: Img3,
+    title: "Mulheres na liderança",
+    day: "25/04/2023",
+    type: "Empresarial",
+    isTopSell: false
+  },
+  {
+    id: 10,
+    img: Img2,
+    title: "Destaque-se no mercado de trabalho",
+    day: "10/01/2023",
+    type: "Acadêmico",
+    isTopSell: false
+  },
+  {
+    id: 11,
+    img: Img3,
+    title: "Multidisciplinaridade na tecnologia",
+    day: "15/02/2023",
+    type: "Acadêmico",
+    isTopSell: false
+  },
 ] 
