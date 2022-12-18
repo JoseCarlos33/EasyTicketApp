@@ -15,11 +15,9 @@ function EventsList({route, navigation}: any) {
   const formHandler = useForm();
   const searchInputRef = useRef<any>(null);
   const isSearchInputFocused = route.params.isSearchInputFocused;
-  console.log(isSearchInputFocused);
 
   const clearParams = () => {
     navigation.setParams({isSearchInputFocused: false})
-    console.log(isSearchInputFocused);
   }
 
   return (

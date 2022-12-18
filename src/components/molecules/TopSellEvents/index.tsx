@@ -31,7 +31,9 @@ function TopSellEvents() {
                 image={info.img}
                 day={info.day}
                 type={info.type}
-                onPress={() => { }}
+                onPress={() =>navigation.navigate("EventDetail", {
+                  eventId: info.id
+                })}
               />
             </View>
           ) : (<View key={info.id}></View>))

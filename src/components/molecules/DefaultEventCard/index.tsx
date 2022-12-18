@@ -31,7 +31,7 @@ export default function DefaultEventCard({ image, title, day, onPress, type, id 
   const toogleFavorite = () => setIsFavorite(!isFavorite);
 
   return (
-    <Container key={id}>
+    <Container key={id} onPress={onPress}>
       <ImageContent>
         <CardImage source={image} resizeMode="stretch" />
       </ImageContent>

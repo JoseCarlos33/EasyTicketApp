@@ -9,6 +9,7 @@ import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import { theme } from '@utils/theme';
 import EventsList from 'src/screens/EventsList';
 import EventDetail from 'src/screens/EventDetail';
+import RequestAuth from 'src/screens/RequestAuth';
 
 Icon.loadFont()
 IconMaterial.loadFont()
@@ -16,7 +17,7 @@ IconMaterial.loadFont()
 const Tab = createMaterialBottomTabNavigator();
 const teste = 5;
 
-export function TapRoutes() {
+export function TapRoutesPreAuth() {
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -51,7 +52,7 @@ export function TapRoutes() {
       />
       <Tab.Screen
         name="Carrinho"
-        component={Test}
+        component={RequestAuth}
         options={{
           tabBarLabel: 'Carrinho',
           // tabBarColor: '#1f65ff',
@@ -64,7 +65,7 @@ export function TapRoutes() {
       />
       <Tab.Screen
         name="Favoritos"
-        component={Test}
+        component={RequestAuth}
         options={{
           tabBarLabel: 'Favoritos',
           // tabBarColor: '#1f65ff',
@@ -77,7 +78,7 @@ export function TapRoutes() {
       />
       <Tab.Screen
         name="Perfil"
-        component={Test}
+        component={RequestAuth}
         options={{
           tabBarLabel: 'Perfil',
           // tabBarColor: '#694fad',
@@ -90,7 +91,7 @@ export function TapRoutes() {
   );
 }
 
-export function AppRoutes() {
+export function AuthRoutes() {
   return (
     <Navigator
       screenOptions={{
@@ -100,8 +101,8 @@ export function AppRoutes() {
       }}
     >
       <Screen
-        name="TabScreensAfterAuth"
-        component={TapRoutes}
+        name="TabScreens"
+        component={TapRoutesPreAuth}
         options={{ headerShown: false }}
       />
       <Screen

@@ -60,11 +60,13 @@ export const theme = {
     white: '#FFFFFF',
     blue: '#00aaf2',
     background: '#fafafa',
+    background_medium: '#f5f5f5',
     orange: '#f28200',
     red: '#FF0000',
     dark_blue: '#0078be',
     gray_medium: '#969696',
     gray_dark: '#807e7e',
+    blue_dark: '#434854',
     green: "#13a100"
   },
 };

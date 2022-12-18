@@ -1,16 +1,18 @@
 import React from 'react';
 import { Button, Title } from './styles';
+import { StyleProp, ViewStyle} from 'react-native';
 
 interface DefaultButtonProps{
   title: string;
   onPress: () => void;
-  styles?: React.CSSProperties;
+  style?: StyleProp<ViewStyle>;
 }
 
-function DefaultButton({title, onPress, styles}: DefaultButtonProps) {
+function DefaultButton({title, onPress, style}: DefaultButtonProps) {
   return (
     <Button
       onPress={onPress}
+      style={style}
     >
       <Title>
         {title}

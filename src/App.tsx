@@ -12,6 +12,7 @@ import {
   MD3LightTheme as DefaultTheme,
   Provider as PaperProvider
 } from 'react-native-paper';
+import { AuthProvider } from './hooks/useAuth';
 
 export default function App() {
   return (
@@ -22,7 +23,9 @@ export default function App() {
           backgroundColor="transparent"
         />
         <PaperProvider theme={paperTheme}>
-          <Routes />
+          <AuthProvider>
+            <Routes />
+          </AuthProvider>
         </PaperProvider>
       </GestureHandlerRootView>
     </ThemeProvider>
