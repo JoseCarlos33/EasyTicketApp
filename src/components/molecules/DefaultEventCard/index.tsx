@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ImageRequireSource, ImageURISource, View } from 'react-native';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
+import { theme } from 'src/utils/theme';
 import {
   Container,
   CardImage,
@@ -35,32 +36,31 @@ export default function DefaultEventCard({ image, title, day, onPress, type, id 
         <CardImage source={image} resizeMode="stretch" />
       </ImageContent>
       <InfoContent>
-        <CardHeader>
-          <DayTitle>
-            {day}
-          </DayTitle>
-          <IconButton onPress={toogleFavorite}>
-            {
-              isFavorite ? (
-                <IconMaterial name="favorite" color={'red'} size={23} />
-              ) : (
-                <IconMaterial name="favorite-border" color={'red'} size={23} />
-              )
-            }
-          </IconButton>
-        </CardHeader>
         <Title>
           {title}
         </Title>
         <View style={{ marginTop: 10 }}>
+          <View style={{ marginBottom: 2 }}>
+            <DayTitle>
+              {day}
+            </DayTitle>
+          </View>
           <Subtitle>
-            Tipo do evento:
-          </Subtitle>
-          <Subtitle>
-            {"  "} - {type}
+            Evento {type}
           </Subtitle>
         </View>
       </InfoContent>
+      <View>
+        <IconButton onPress={toogleFavorite}>
+          {
+            isFavorite ? (
+              <IconMaterial name="favorite" color={'red'} size={27} />
+            ) : (
+              <IconMaterial name="favorite-border" color={theme.color.gray_dark} size={27} />
+            )
+          }
+        </IconButton>
+      </View>
     </Container>
   );
 }

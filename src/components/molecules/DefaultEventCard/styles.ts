@@ -14,7 +14,7 @@ export const Container = styled.TouchableOpacity`
 
 export const ImageContent = styled.View`
   width: ${wp(30)}px;
-  height: ${hp(14)}px;  
+  height: ${hp(12)}px;  
   border-radius: 10px;
   margin-top: 2px;
   overflow: hidden;
@@ -33,6 +33,7 @@ export const Title = styled.Text`
 export const InfoContent = styled.View`
   flex: 1;
   margin-left: 12px;
+  justify-content: space-between;
 `;
 
 export const CardHeader = styled.View`
@@ -45,7 +46,7 @@ export const CardHeader = styled.View`
 export const Subtitle = styled.Text`
   font-size: ${RFValue(14)}px;
   font-family: Inter-regular;
-  color: ${theme.color.gray_medium}
+  color: ${theme.color.gray_dark}
 `;
 
 export const DayTitle = styled.Text`
@@ -55,5 +56,7 @@ export const DayTitle = styled.Text`
 `;
 
 export const IconButton = styled.TouchableOpacity`
-  padding: 2px;
+  padding: 5px;
+  flex: 1;
+  justify-content: center;
 `;
