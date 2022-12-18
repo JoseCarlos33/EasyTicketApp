@@ -23,7 +23,10 @@ function WeekNewEvents() {
       <CardsContent>
         {
           newWeekEvents?.map(info =>
-            <NewWeekEventCard image={info.img} id={info.id} onPress={() => { }} />)
+            <View key={info.id}>
+              <NewWeekEventCard image={info.img} id={info.id} onPress={() => { }} />
+            </View>
+          )
         }
       </CardsContent>
     </Container>
