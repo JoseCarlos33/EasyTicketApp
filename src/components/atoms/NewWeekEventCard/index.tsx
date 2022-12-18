@@ -13,7 +13,7 @@ interface NewWeekEventCardProps {
 
 function NewWeekEventCard({ image, onPress, id }: NewWeekEventCardProps) {
   return (
-    <Container key={id}>
+    <Container key={id} onPress={onPress}>
       <BackgroundImage source={image} resizeMode="cover"/>
     </Container>
   );

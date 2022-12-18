@@ -13,8 +13,11 @@ import {
 } from './styles';
 import NewWeekEventCard from '@components/atoms/NewWeekEventCard';
 import { View } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 function WeekNewEvents() {
+  const navigation = useNavigation<any>();
+
   return (
     <Container>
       <Title>
@@ -24,7 +27,9 @@ function WeekNewEvents() {
         {
           newWeekEvents?.map(info =>
             <View key={info.id}>
-              <NewWeekEventCard image={info.img} id={info.id} onPress={() => { }} />
+              <NewWeekEventCard image={info.img} id={info.id} onPress={() => navigation.navigate("EventDetail", {
+                eventId: info.id
+              })} />
             </View>
           )
         }

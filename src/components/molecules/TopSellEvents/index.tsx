@@ -1,9 +1,4 @@
 import React from 'react';
-import { newWeekEvents } from 'src/mocks/newWeekEvents';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
 
 import {
   Container,

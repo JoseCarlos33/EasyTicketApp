@@ -31,9 +31,10 @@ export function TapRoutes() {
           tabBarLabel: 'Home',
           // tabBarColor: '#009387',
           // tabBarBadge: teste,
-          tabBarIcon: ({ color }) => (
-            <Icon name="ios-home" color={color} size={26} />
-          ),
+          tabBarIcon: ({ color, focused}) => focused ? 
+            (<Icon name="ios-home" color={color} size={26} /> ) : (
+            <IconMaterial name="home-filled" color={color} size={27} />)
+          ,
         }}
       />
       <Tab.Screen
@@ -46,6 +47,19 @@ export function TapRoutes() {
           tabBarIcon: ({ color }) => (
             <IconMaterial name="explore" color={color} size={27} />
           ),
+        }}
+      />
+      <Tab.Screen
+        name="Carrinho"
+        component={Test}
+        options={{
+          tabBarLabel: 'Carrinho',
+          // tabBarColor: '#1f65ff',
+          tabBarIcon: ({ color, focused }) => focused ? (
+            <IconMaterial name="shopping-cart" color={color} size={27} />
+          ) : (
+            <IconMaterial name="add-shopping-cart" color={color} size={27} />
+          )
         }}
       />
       <Tab.Screen
@@ -93,6 +107,7 @@ export function AppRoutes() {
       <Screen
         name="EventDetail"
         component={EventDetail}
+        initialParams={{ eventId: null }}
       />
     </Navigator>
   )
