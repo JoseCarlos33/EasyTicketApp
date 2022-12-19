@@ -15,7 +15,7 @@ import {
 import DefaultButton from 'src/components/atoms/DefaultButton';
 import { theme } from 'src/utils/theme';
 
-export default function RequestAuth() {
+export default function RequestAuth({navigation}: any) {
   return (
     <Container>
       <ContentTitles>
@@ -36,7 +36,9 @@ export default function RequestAuth() {
       />
       <ButtonContent>
         <DefaultButton 
-          onPress={() => {}} 
+          onPress={() => navigation.navigate("LoginRegister", {
+            isSignInSelected: true
+          })}
           title="Login"
           style={{
             width: wp(40),
@@ -44,7 +46,9 @@ export default function RequestAuth() {
           }}
         />
         <DefaultButton 
-          onPress={() => {}} 
+          onPress={() => navigation.navigate("LoginRegister", {
+            isSignInSelected: false
+          })}
           title="Cadastro"
           style={{
             width: wp(40),

@@ -10,6 +10,7 @@ import { theme } from '@utils/theme';
 import EventsList from 'src/screens/EventsList';
 import EventDetail from 'src/screens/EventDetail';
 import RequestAuth from 'src/screens/RequestAuth';
+import LoginRegister from 'src/screens/LoginRegister';
 
 Icon.loadFont()
 IconMaterial.loadFont()
@@ -109,6 +110,10 @@ export function AuthRoutes() {
         name="EventDetail"
         component={EventDetail}
         initialParams={{ eventId: null }}
+      />
+      <Screen
+        name="LoginRegister"
+        component={LoginRegister}
       />
     </Navigator>
   )

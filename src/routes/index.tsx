@@ -9,7 +9,7 @@ export function Routes(){
 
   return(
     <NavigationContainer>
-      {signed ? <AuthRoutes/> : <AppRoutes/>}
+      {signed ? <AppRoutes/> :  <AuthRoutes/>}
     </NavigationContainer>
   );
 }
