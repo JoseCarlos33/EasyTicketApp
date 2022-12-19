@@ -13,6 +13,7 @@ import {
   Provider as PaperProvider
 } from 'react-native-paper';
 import { AuthProvider } from './hooks/useAuth';
+import { CartProvider } from './hooks/useCart';
 
 export default function App() {
   return (
@@ -24,7 +25,9 @@ export default function App() {
         />
         <PaperProvider theme={paperTheme}>
           <AuthProvider>
-            <Routes />
+            <CartProvider>
+              <Routes />
+            </CartProvider>
           </AuthProvider>
         </PaperProvider>
       </GestureHandlerRootView>

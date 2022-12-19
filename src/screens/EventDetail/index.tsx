@@ -24,7 +24,13 @@ import { Image, StatusBar, View } from 'react-native';
 import DefaultButton from 'src/components/atoms/DefaultButton';
 import { RFValue } from 'react-native-responsive-fontsize';
 
-IconMaterial.loadFont()
+IconMaterial.loadFont();
+
+interface TicketProps{
+  id: number;
+  value: number;
+  title: string;
+}
 
 export default function EventDetail({ route, navigation }: any) {
   const [isFavorite, setIsFavorite] = useState(false);
@@ -176,7 +182,7 @@ export default function EventDetail({ route, navigation }: any) {
             <TicketText style={{ fontSize: RFValue(15), color: theme.color.gray_medium}}>
               {
                 selectedTickets
-                  ?.reduce((total, ticket) => total + ticket.value, 0)
+                  ?.reduce((total: number, ticket: TicketProps)=> total + ticket.value, 0)
                   ?.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })   
               }
             </TicketText>
