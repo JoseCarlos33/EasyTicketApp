@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, ScrollView, View } from 'react-native';
+import { Alert, Image, ScrollView, View } from 'react-native';
 import HeaderNavigation from 'src/components/atoms/HeaderNavigation';
 import CartTicketCard from 'src/components/molecules/CartTicketCard';
 import { useCart } from 'src/hooks/useCart';
@@ -22,7 +22,7 @@ IconMaterial.loadFont();
 
 function Cart({ navigation }: any) {
   
-  const { cart, totalTicketsValue } = useCart();
+  const { cart, totalTicketsValue, handleClearCart } = useCart();
 
   
   return (
@@ -93,7 +93,11 @@ function Cart({ navigation }: any) {
                 <View style={{ marginTop: 10 }}>
                   <DefaultButton
                     title="Finalizar compra"
-                    onPress={() => { }}
+                    onPress={() => { 
+                      Alert.alert("Compra finalizada com sucesso!");
+                      navigation.navigate('TabScreens', { screen: 'Home'})
+                      handleClearCart();
+                    }}
                   />
                 </View>
               </>
