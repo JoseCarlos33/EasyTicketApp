@@ -46,11 +46,11 @@ export const CardHeader = styled.View`
 export const Subtitle = styled.Text`
   font-size: ${RFValue(16)}px;
   font-family: Inter-regular;
-  color: ${theme.color.gray_dark}
+  color: ${theme.color.blue_dark};
 `;
 
 export const DayTitle = styled.Text`
   font-size: ${RFValue(12)}px;
   font-family: Inter-SemiBold;
-  color: ${theme.color.blue}
+  color: ${theme.color.blue};
 `;

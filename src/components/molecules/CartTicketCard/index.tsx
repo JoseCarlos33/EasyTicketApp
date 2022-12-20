@@ -30,10 +30,10 @@ export default function CartTicketCard({ image, title, onPress, tickets, id }: N
   const addTickets = (newTickets: any) => {
     const ticketsFormatteds = newTickets
       ?.map((ticket: any) => {
-        const quantityOfRepetitions = tickets.filter( (item: any) => item.id === ticket.id)?.length
-        return {...ticket, value: ticket.value * quantityOfRepetitions, quantity: quantityOfRepetitions}
+        const quantityOfRepetitions = tickets.filter((item: any) => item.id === ticket.id)?.length
+        return { ...ticket, value: ticket.value * quantityOfRepetitions, quantity: quantityOfRepetitions }
       })
-    
+
     setCurrentTickets(ticketsFormatteds)
   }
   useEffect(() => {
@@ -41,8 +41,8 @@ export default function CartTicketCard({ image, title, onPress, tickets, id }: N
     const ticketsWithNewValuesAndQuantity = [...ticketsWithoutRepetition.values()]
     addTickets(ticketsWithNewValuesAndQuantity);
   }, [tickets]);
-  
-  
+
+
   return (
     <Container key={id} onPress={onPress}>
       <InfoContent>
@@ -53,12 +53,17 @@ export default function CartTicketCard({ image, title, onPress, tickets, id }: N
           {
             currentTickets.length > 0
               ? currentTickets.map((item: any, index: any) => {
-                
-                return <View key={index}>
-                  <Subtitle>
-                    {item.title}{" "}{item.quantity ?? ""}
-                  </Subtitle>
-                </View>
+
+                return (
+                  <View key={index} style={{ flex: 1, flexDirection: 'row', justifyContent: "space-between" }}>
+                    <Subtitle>
+                      {item.title}{"  "}{item.quantity ?? ""}x
+                    </Subtitle>
+                    <Subtitle>
+                      {item?.value?.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })}
+                    </Subtitle>
+                  </View>
+                )
               })
               : <></>
           }
@@ -71,6 +76,16 @@ export default function CartTicketCard({ image, title, onPress, tickets, id }: N
             marginTop: 10
           }}
         />
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-end", marginTop: 10}}>
+          <Subtitle>
+            Subtotal: {" "}{
+              currentTickets
+                ?.reduce((total: number, ticket: TicketProps)=> total + ticket.value, 0)
+                ?.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })   
+              }
+            {/* ?.value?.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) */}
+          </Subtitle>
+        </View>
       </InfoContent>
 
     </Container>
