@@ -20,9 +20,11 @@ import {
   TicketText,
 } from './styles';
 import { theme } from 'src/utils/theme';
-import { Image, StatusBar, View } from 'react-native';
+import { Alert, Image, StatusBar, View } from 'react-native';
 import DefaultButton from 'src/components/atoms/DefaultButton';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { useCart } from 'src/hooks/useCart';
+import { useAuth } from 'src/hooks/useAuth';
 
 IconMaterial.loadFont();
 
@@ -37,11 +39,32 @@ export default function EventDetail({ route, navigation }: any) {
   const eventId = route.params.eventId;
   const currentEvent = allEvents.filter(event => event.id === eventId)?.[0];
   const [selectedTickets, setSelectedTickets] = useState<any>([]);
-
+  const { handleChangeCart } = useCart();
+  const { signed } = useAuth();
   const toogleFavorite = () => setIsFavorite(!isFavorite);
-  const totalTicketsValue = () => {
-    const ticketsValues = selectedTickets?.map()
+
+
+  const handleAddItemsInCart = () => {
+    if(signed){
+      if(selectedTickets.length > 0) {
+        const newSelectedTickets = {
+          productId: eventId,
+          tickets: selectedTickets
+        }
+        handleChangeCart(newSelectedTickets)
+        navigation.navigate('TabScreens', { screen: 'Home'})
+      }
+  
+      if(selectedTickets.length === 0) {
+        Alert.alert("Por favor, selecione a quantidade de tickets desejada")
+      }
+    }
+
+    if(!signed){
+      Alert.alert("É necessário fazer o login para adicionar itens no carrinho")
+    }
   }
+
   return (
     <Container>
       <Header>
@@ -189,7 +212,7 @@ export default function EventDetail({ route, navigation }: any) {
           </View>
         }
         <View style={{minWidth: selectedTickets.length > 0 ? "66%" : "100%", paddingHorizontal: 10}}>
-          <DefaultButton onPress={() => { }} title="Adicionar ao carrinho" />
+          <DefaultButton onPress={handleAddItemsInCart} title="Adicionar ao carrinho" />
         </View>
       </InfoContent>
     </Container>

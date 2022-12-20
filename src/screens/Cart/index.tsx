@@ -1,6 +1,7 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import HeaderNavigation from 'src/components/atoms/HeaderNavigation';
+import CartTicketCard from 'src/components/molecules/CartTicketCard';
 import { useCart } from 'src/hooks/useCart';
 import EmptyCart from '../EmptyCart';
 import {
@@ -9,6 +10,7 @@ import {
   ContentTitle,
   Content
 } from './styles';
+import { allEvents } from 'src/mocks/allEvents';
 
 function Cart({ navigation }: any) {
   const { cart } = useCart();
@@ -26,9 +28,27 @@ function Cart({ navigation }: any) {
                 <ContentTitle>
                   Seus Ingressos
                 </ContentTitle>
+                {cart.map((cartItem, index) => {
+                  const eventData = allEvents.filter( event => event.id === cartItem.productId)?.[0];
+             
+                  return(
+                    <View key={index}>
+                      <CartTicketCard
+                        image={eventData?.img}
+                        title={eventData?.title}
+                        onPress={() => navigation.navigate("EventDetail", {
+                          eventId: cartItem.productId
+                        })} 
+                        tickets={cartItem.tickets}
+                      />
+                    </View>
+                  )
+                }
+                )}
+                
               </InfoContent>
             ) : (
-              <EmptyCart navigation={navigation}/>
+              <EmptyCart navigation={navigation} />
             )
           }
         </Content>

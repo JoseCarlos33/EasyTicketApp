@@ -22,6 +22,6 @@ export const InfoContent = styled.View`
 `;
 
 export const ContentTitle = styled.Text`
-  font-size: ${RFValue(18)}px;
+  font-size: ${RFValue(21)}px;
   font-family: Inter-SemiBold;
 `;
