@@ -29,55 +29,56 @@ interface CartProps {
 interface IAuthContextData {
   cart: Array<CartProps>;
   handleChangeCart: (product: CartProps) => void;
+  totalTicketsValue: number;
 }
 
 const CartContext = createContext({} as IAuthContextData);
 
 function CartProvider({ children }: AuthProviderProps) {
   const [cart, setCart] = useState<Array<CartProps>>([]);
-  // const [signed, setSigned] = useState(false);
+  const [allTickets, setAllTickets] = useState<Array<TicketProps>>([]);
+  const [totalTicketsValue, setTotalTicketsValue] = useState(0);
 
-  // const userTokenKey = '@ea:token';
-  // const userKey = '@easyTicket:user';
+  function calculateTotalValue(){
+    const totalValue = allTickets?.reduce((total: number, ticket: any) => total + ticket.value, 0);
+    console.log("teste value", totalValue, allTickets)
+    setTotalTicketsValue(totalValue)
+  }
 
   function handleChangeCart(product: CartProps) {
     const isSameProduct = cart.filter(item => item.productId === product.productId)?.[0]
     const cartWithoutFindProduct = cart.filter(item => item.productId !== product.productId)
 
-    const newProductsOrsTickets = !!isSameProduct 
-      ? [...cartWithoutFindProduct, {...isSameProduct, ["tickets"]: [...isSameProduct.tickets, ...product.tickets]}]
+    const newProductsOrsTickets = !!isSameProduct
+      ? [...cartWithoutFindProduct, { ...isSameProduct, ["tickets"]: [...isSameProduct.tickets, ...product.tickets] }]
       : [...cart, product]
-    
+
     setCart(newProductsOrsTickets)
     Alert.alert('Produto adicionado ao carrinho com sucesso!');
+
+    newProductsOrsTickets.map((item, index) => {
+      if(index === 0){
+        setAllTickets([...item.tickets])
+      }
+      if(index !== 0){
+        setAllTickets(oldTickets => [...oldTickets, ...item.tickets])
+      }
+    })
   }
 
+  useEffect(() => {
+    calculateTotalValue();
+  }, [allTickets])
 
-// useEffect(() => {
-// async function loadStorageData(): Promise<void> {
-//   setUserStorageLoading(true)
-//   const user = await AsyncStorage.getItem(userKey) ?? "{}";
-//   const useFormatted = JSON.parse(user);
-
-//   if (user) {
-//     setSigned(true);
-//   }
-
-//   setTimeout(() => {
-//     setUserStorageLoading(false)
-//   }, 500);
-// }
-
-//   loadStorageData();
-// }, []);
-return (
-  <CartContext.Provider value={{
-    cart,
-    handleChangeCart
-  }}>
-    {children}
-  </CartContext.Provider>
-)
+  return (
+    <CartContext.Provider value={{
+      cart,
+      handleChangeCart,
+      totalTicketsValue
+    }}>
+      {children}
+    </CartContext.Provider>
+  )
 }
 
 

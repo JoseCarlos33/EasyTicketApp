@@ -25,3 +25,9 @@ export const ContentTitle = styled.Text`
   font-size: ${RFValue(21)}px;
   font-family: Inter-SemiBold;
 `;
+
+export const Subtitle = styled.Text`
+  font-size: ${RFValue(14)}px;
+  font-family: Inter-regular;
+  color: ${theme.color.blue_dark};
+`;
