@@ -11,6 +11,7 @@ import EventsList from 'src/screens/EventsList';
 import EventDetail from 'src/screens/EventDetail';
 import Cart from 'src/screens/Cart';
 import EmptyCart from 'src/screens/EmptyCart';
+import Profile from 'src/screens/Profile';
 
 Icon.loadFont()
 IconMaterial.loadFont()
@@ -79,7 +80,7 @@ export function TapRoutes() {
       />
       <Tab.Screen
         name="Perfil"
-        component={Test}
+        component={Profile}
         options={{
           tabBarLabel: 'Perfil',
           // tabBarColor: '#694fad',

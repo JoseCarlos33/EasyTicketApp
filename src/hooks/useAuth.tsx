@@ -21,6 +21,7 @@ interface LoginProps {
 interface UserProps {
   id: string;
   name: string;
+  email?: string;
 }
 
 interface IAuthContextData {
@@ -35,7 +36,7 @@ const AuthContext = createContext({} as IAuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<UserProps>({} as UserProps);
-  const [userStorageLoading, setUserStorageLoading] = useState(true);
+  const [userStorageLoading, setUserStorageLoading] = useState(false);
   const [signed, setSigned] = useState(false);
 
   const userTokenKey = '@ea:token';
@@ -48,15 +49,20 @@ function AuthProvider({ children }: AuthProviderProps) {
       email: email
     }
     setSigned(true);
+    setUser(data);
     await AsyncStorage.setItem(userTokenKey, "12312434123");
     await AsyncStorage.setItem(userKey, JSON.stringify(data));
   };
 
-  const signOut = useCallback(async () => {
+  const signOut = async () => {
+    setUserStorageLoading(true);
     await AsyncStorage.removeItem(userKey);
     setSigned(false);
     setUser({} as UserProps);
-  }, []);
+    console.log("user", user)
+    setUserStorageLoading(false);
+  }
+  
 
   useEffect(() => {
     async function loadStorageData(): Promise<void> {

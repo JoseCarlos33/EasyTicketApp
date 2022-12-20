@@ -28,7 +28,7 @@ import { useAuth } from 'src/hooks/useAuth';
 
 IconMaterial.loadFont();
 
-interface TicketProps{
+interface TicketProps {
   id: number;
   value: number;
   title: string;
@@ -45,22 +45,22 @@ export default function EventDetail({ route, navigation }: any) {
 
 
   const handleAddItemsInCart = () => {
-    if(signed){
-      if(selectedTickets.length > 0) {
+    if (signed) {
+      if (selectedTickets.length > 0) {
         const newSelectedTickets = {
           productId: eventId,
           tickets: selectedTickets
         }
         handleChangeCart(newSelectedTickets)
-        navigation.navigate('TabScreens', { screen: 'Home'})
+        navigation.navigate('TabScreens', { screen: 'Home' })
       }
-  
-      if(selectedTickets.length === 0) {
+
+      if (selectedTickets.length === 0) {
         Alert.alert("Por favor, selecione a quantidade de tickets desejada")
       }
     }
 
-    if(!signed){
+    if (!signed) {
       Alert.alert("É necessário fazer o login para adicionar itens no carrinho")
     }
   }
@@ -129,12 +129,15 @@ export default function EventDetail({ route, navigation }: any) {
               }
 
               return (
-                <View style={{
-                  flexDirection: "row",
-                  marginTop: 21,
-                  alignItems: 'center',
-                  justifyContent: "space-between",
-                }}>
+                <View
+                  key={ticket.id}
+                  style={{
+                    flexDirection: "row",
+                    marginTop: 21,
+                    alignItems: 'center',
+                    justifyContent: "space-between",
+                  }}
+                >
                   <View style={{ flexDirection: "column", }}>
                     <TicketText>
                       {ticket?.title}
@@ -185,33 +188,33 @@ export default function EventDetail({ route, navigation }: any) {
           width: "100%",
           flexDirection: "row",
           justifyContent: "center",
-          
+
         }}
       >
         {
           selectedTickets?.length > 0 &&
-          <View 
+          <View
             style={{
-              marginRight: 10, 
-              paddingHorizontal: 0, 
-              alignItems: "flex-start", 
+              marginRight: 10,
+              paddingHorizontal: 0,
+              alignItems: "flex-start",
               marginLeft: 10,
               justifyContent: "space-between"
             }}
           >
-            <TicketText style={{ fontSize: RFValue(18)}}>
+            <TicketText style={{ fontSize: RFValue(18) }}>
               Total:
             </TicketText>
-            <TicketText style={{ fontSize: RFValue(15), color: theme.color.gray_medium}}>
+            <TicketText style={{ fontSize: RFValue(15), color: theme.color.gray_medium }}>
               {
                 selectedTickets
-                  ?.reduce((total: number, ticket: TicketProps)=> total + ticket.value, 0)
-                  ?.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })   
+                  ?.reduce((total: number, ticket: TicketProps) => total + ticket.value, 0)
+                  ?.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
               }
             </TicketText>
           </View>
         }
-        <View style={{minWidth: selectedTickets.length > 0 ? "66%" : "100%", paddingHorizontal: 10}}>
+        <View style={{ minWidth: selectedTickets.length > 0 ? "66%" : "100%", paddingHorizontal: 10 }}>
           <DefaultButton onPress={handleAddItemsInCart} title="Adicionar ao carrinho" />
         </View>
       </InfoContent>

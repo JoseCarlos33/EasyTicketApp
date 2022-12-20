@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { StatusBar, View } from 'react-native';
 import {
   Container,
@@ -11,13 +11,19 @@ import { allEvents } from 'src/mocks/allEvents';
 import DefaultEventCard from 'src/components/molecules/DefaultEventCard';
 import { useFocusEffect } from '@react-navigation/native';
 
-function EventsList({route, navigation}: any) {
+function EventsList({ route, navigation }: any) {
   const formHandler = useForm();
   const searchInputRef = useRef<any>(null);
   const isSearchInputFocused = route.params.isSearchInputFocused;
+  const { watch } = formHandler;
+  const searchInputValue = watch('searchEvents')?.toString().toLowerCase();
+
+  const listFilteredWithPerformance = useCallback(() =>
+    allEvents.filter(event => !!searchInputValue ? event.title.toLowerCase().includes(searchInputValue) : true),
+  [allEvents, searchInputValue])()
 
   const clearParams = () => {
-    navigation.setParams({isSearchInputFocused: false})
+    navigation.setParams({ isSearchInputFocused: false })
   }
 
   return (
@@ -38,7 +44,7 @@ function EventsList({route, navigation}: any) {
           />
           <ListContent>
             {
-              allEvents?.map(info =>
+              listFilteredWithPerformance?.map(info =>
                 <View key={info.id}>
                   <DefaultEventCard
                     id={info.id}
@@ -46,9 +52,11 @@ function EventsList({route, navigation}: any) {
                     image={info.img}
                     day={info.day}
                     type={info.type}
-                    onPress={() => { }}
+                    onPress={() =>navigation.navigate("EventDetail", {
+                      eventId: info.id
+                    })}
                   />
-                </View> 
+                </View>
               )
             }
           </ListContent>

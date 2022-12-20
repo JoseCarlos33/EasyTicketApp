@@ -100,6 +100,7 @@ export function AuthRoutes() {
         autoHideHomeIndicator: true,
         headerShown: false
       }}
+      initialRouteName='TabScreens'
     >
       <Screen
         name="TabScreens"
