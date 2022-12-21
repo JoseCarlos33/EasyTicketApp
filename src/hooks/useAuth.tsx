@@ -39,7 +39,7 @@ function AuthProvider({ children }: AuthProviderProps) {
   const [userStorageLoading, setUserStorageLoading] = useState(false);
   const [signed, setSigned] = useState(false);
 
-  const userTokenKey = '@ea:token';
+  const userTokenKey = '@easyTicket:token';
   const userKey = '@easyTicket:user';
 
   const signIn = async ({ email, password }: LoginProps) => {

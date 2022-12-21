@@ -40,6 +40,7 @@ function CartProvider({ children }: TicketProviderProps) {
   const [cart, setCart] = useState<Array<CartProps>>([]);
   const [allTickets, setAllTickets] = useState<Array<TicketProps>>([]);
   const [totalTicketsValue, setTotalTicketsValue] = useState(0);
+  const cartStorageKey = '@easyTicket:cart';
 
   function calculateTotalValue(){
     const totalValue = allTickets?.reduce((total: number, ticket: any) => total + ticket.value, 0);
@@ -83,12 +84,29 @@ function CartProvider({ children }: TicketProviderProps) {
   }, [allTickets])
 
   useEffect(() => {
+    async function changeStorageData(): Promise<void> {
+      const cartFormatted = JSON.stringify(cart);
+      await AsyncStorage.setItem(cartStorageKey, cartFormatted);
+    }
+
+    changeStorageData();
     handleChangeTickets(cart);
   }, [cart])
 
+
   useEffect(() => {
-    
-  }, [cart])
+    async function loadStorageData(): Promise<void> {
+      const cart = await AsyncStorage.getItem(cartStorageKey) ?? "{}";
+      const cartFormatted = JSON.parse(cart);
+
+      if (cart) {
+        setCart(cartFormatted);
+      }
+      console.log("CART STORAGE",cartFormatted);
+    }
+
+    loadStorageData();
+  }, [])
 
   return (
     <CartContext.Provider value={{
