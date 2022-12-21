@@ -12,10 +12,12 @@ import { allEvents } from 'src/mocks/allEvents';
 import { TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useFavorite } from 'src/hooks/useFavorites';
 
 function TopSellEvents() {
   const navigation = useNavigation<NativeStackNavigationProp<any>>();
-
+  const { favorites } = useFavorite();
+  console.log("teste", favorites)
   return (
     <Container>
       <Title>

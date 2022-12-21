@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImageRequireSource, ImageURISource, View } from 'react-native';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
+import { useFavorite } from 'src/hooks/useFavorites';
 import { theme } from 'src/utils/theme';
 import {
   Container,
@@ -18,7 +19,7 @@ interface NewWeekEventCardProps {
   title: string;
   image: ImageURISource | ImageURISource[] | ImageRequireSource;
   onPress: () => void;
-  id?: number;
+  id: number;
   day: string;
   type: string;
 }
@@ -26,9 +27,13 @@ interface NewWeekEventCardProps {
 IconMaterial.loadFont();
 
 export default function DefaultEventCard({ image, title, day, onPress, type, id }: NewWeekEventCardProps) {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const{ favorites, handleAddFavorites, handleRemoveFavorites } = useFavorite();
 
-  const toogleFavorite = () => setIsFavorite(!isFavorite);
+  const toogleFavorite = () => {
+    const isCurrentProductInFavorites = !!favorites ? favorites.includes(id) : false;
+    if(isCurrentProductInFavorites) handleRemoveFavorites(id);
+    if(!isCurrentProductInFavorites) handleAddFavorites(id);
+  }
 
   return (
     <Container key={id} onPress={onPress}>
@@ -53,7 +58,7 @@ export default function DefaultEventCard({ image, title, day, onPress, type, id 
       <View>
         <IconButton onPress={toogleFavorite}>
           {
-            isFavorite ? (
+            favorites?.includes(id) ? (
               <IconMaterial name="favorite" color={'red'} size={27} />
             ) : (
               <IconMaterial name="favorite-border" color={theme.color.gray_dark} size={27} />

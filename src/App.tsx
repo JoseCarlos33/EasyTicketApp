@@ -14,6 +14,7 @@ import {
 } from 'react-native-paper';
 import { AuthProvider } from './hooks/useAuth';
 import { CartProvider } from './hooks/useCart';
+import { FavoriteProvider } from './hooks/useFavorites';
 
 export default function App() {
   return (
@@ -26,7 +27,9 @@ export default function App() {
         <PaperProvider theme={paperTheme}>
           <AuthProvider>
             <CartProvider>
-              <Routes />
+              <FavoriteProvider>
+                <Routes />
+              </FavoriteProvider>
             </CartProvider>
           </AuthProvider>
         </PaperProvider>

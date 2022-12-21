@@ -11,7 +11,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Alert } from 'react-native';
 import Toast from 'react-native-toast-message';
 
-interface AuthProviderProps {
+interface TicketProviderProps {
   children: ReactNode;
 }
 
@@ -26,7 +26,7 @@ interface CartProps {
   tickets: Array<TicketProps>;
 }
 
-interface IAuthContextData {
+interface ITicketContextData {
   cart: Array<CartProps>;
   handleChangeCart: (product: CartProps) => void;
   deleteTicket: (ticketId: number) => void;
@@ -34,16 +34,15 @@ interface IAuthContextData {
   totalTicketsValue: number;
 }
 
-const CartContext = createContext({} as IAuthContextData);
+const CartContext = createContext({} as ITicketContextData);
 
-function CartProvider({ children }: AuthProviderProps) {
+function CartProvider({ children }: TicketProviderProps) {
   const [cart, setCart] = useState<Array<CartProps>>([]);
   const [allTickets, setAllTickets] = useState<Array<TicketProps>>([]);
   const [totalTicketsValue, setTotalTicketsValue] = useState(0);
 
   function calculateTotalValue(){
     const totalValue = allTickets?.reduce((total: number, ticket: any) => total + ticket.value, 0);
-    console.log("teste value", totalValue, allTickets)
     setTotalTicketsValue(totalValue)
   }
 
@@ -73,7 +72,6 @@ function CartProvider({ children }: AuthProviderProps) {
   }
 
   function deleteTicket(ticketId: number){
-    console.log("CONSOLELOG",ticketId, cart)
     const cartWithoutCurrentTicket = cart.filter( ticket => ticket.productId !== ticketId);
     setCart(cartWithoutCurrentTicket)
   }
@@ -81,6 +79,10 @@ function CartProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     calculateTotalValue();
   }, [allTickets])
+
+  useEffect(() => {
+    
+  }, [cart])
 
   return (
     <CartContext.Provider value={{
