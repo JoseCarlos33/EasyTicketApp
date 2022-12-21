@@ -25,6 +25,7 @@ import DefaultButton from 'src/components/atoms/DefaultButton';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { useCart } from 'src/hooks/useCart';
 import { useAuth } from 'src/hooks/useAuth';
+import { useFavorite } from 'src/hooks/useFavorites';
 
 IconMaterial.loadFont();
 
@@ -35,13 +36,31 @@ interface TicketProps {
 }
 
 export default function EventDetail({ route, navigation }: any) {
-  const [isFavorite, setIsFavorite] = useState(false);
+  const{ favorites, handleAddFavorites, handleRemoveFavorites } = useFavorite();
   const eventId = route.params.eventId;
   const currentEvent = allEvents.filter(event => event.id === eventId)?.[0];
   const [selectedTickets, setSelectedTickets] = useState<any>([]);
   const { handleChangeCart } = useCart();
   const { signed } = useAuth();
-  const toogleFavorite = () => setIsFavorite(!isFavorite);
+
+
+
+  const toogleFavorite = () => {
+    if (!signed) {
+      Alert.alert("É necessário fazer o login para adicionar itens no carrinho", 
+      "",
+      [
+        {text: 'OK', onPress: () => navigation.navigate('TabScreens', { screen: 'Perfil' })},
+      ],
+      {cancelable: false},
+      )
+      return;
+    }
+
+    const isCurrentProductInFavorites = !!favorites ? favorites.includes(eventId) : false;
+    if(isCurrentProductInFavorites) handleRemoveFavorites(eventId);
+    if(!isCurrentProductInFavorites) handleAddFavorites(eventId);
+  }
 
 
   const handleAddItemsInCart = () => {
@@ -61,7 +80,13 @@ export default function EventDetail({ route, navigation }: any) {
     }
 
     if (!signed) {
-      Alert.alert("É necessário fazer o login para adicionar itens no carrinho")
+      Alert.alert("É necessário fazer o login para adicionar itens no carrinho", 
+      "",
+      [
+        {text: 'OK', onPress: () => navigation.navigate('TabScreens', { screen: 'Perfil' })},
+      ],
+      {cancelable: false},
+      )
     }
   }
 
@@ -76,7 +101,7 @@ export default function EventDetail({ route, navigation }: any) {
         </PageTitle>
         <IconButton onPress={toogleFavorite}>
           {
-            isFavorite ? (
+            favorites?.includes(eventId) ? (
               <IconMaterial name="favorite" color={'red'} size={27} />
             ) : (
               <IconMaterial name="favorite-border" color={theme.color.gray_dark} size={27} />

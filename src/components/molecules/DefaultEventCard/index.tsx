@@ -1,6 +1,8 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from 'react';
-import { ImageRequireSource, ImageURISource, View } from 'react-native';
+import { Alert, ImageRequireSource, ImageURISource, View } from 'react-native';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
+import { useAuth } from 'src/hooks/useAuth';
 import { useFavorite } from 'src/hooks/useFavorites';
 import { theme } from 'src/utils/theme';
 import {
@@ -28,8 +30,21 @@ IconMaterial.loadFont();
 
 export default function DefaultEventCard({ image, title, day, onPress, type, id }: NewWeekEventCardProps) {
   const{ favorites, handleAddFavorites, handleRemoveFavorites } = useFavorite();
+  const { signed } = useAuth();
+  const navigation = useNavigation<any>();
 
   const toogleFavorite = () => {
+    if (!signed) {
+      Alert.alert("É necessário fazer o login para adicionar itens no carrinho", 
+      "",
+      [
+        {text: 'OK', onPress: () => navigation.navigate('TabScreens', { screen: 'Perfil' })},
+      ],
+      {cancelable: false},
+      )
+      return;
+    }
+
     const isCurrentProductInFavorites = !!favorites ? favorites.includes(id) : false;
     if(isCurrentProductInFavorites) handleRemoveFavorites(id);
     if(!isCurrentProductInFavorites) handleAddFavorites(id);
