@@ -29,6 +29,7 @@ interface CartProps {
 interface IAuthContextData {
   cart: Array<CartProps>;
   handleChangeCart: (product: CartProps) => void;
+  deleteTicket: (ticketId: number) => void;
   handleClearCart: () => void;
   totalTicketsValue: number;
 }
@@ -71,6 +72,12 @@ function CartProvider({ children }: AuthProviderProps) {
     setCart([])
   }
 
+  function deleteTicket(ticketId: number){
+    console.log("CONSOLELOG",ticketId, cart)
+    const cartWithoutCurrentTicket = cart.filter( ticket => ticket.productId !== ticketId);
+    setCart(cartWithoutCurrentTicket)
+  }
+
   useEffect(() => {
     calculateTotalValue();
   }, [allTickets])
@@ -80,7 +87,8 @@ function CartProvider({ children }: AuthProviderProps) {
       cart,
       handleChangeCart,
       totalTicketsValue,
-      handleClearCart
+      handleClearCart,
+      deleteTicket
     }}>
       {children}
     </CartContext.Provider>

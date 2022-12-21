@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { ImageRequireSource, ImageURISource, View } from 'react-native';
+import { Alert, ImageRequireSource, ImageURISource, TouchableOpacity, View } from 'react-native';
 import { theme } from 'src/utils/theme';
-
+import IconMaterial from 'react-native-vector-icons/MaterialIcons';
+IconMaterial.loadFont();
 import {
   Container,
   Title,
   InfoContent,
   Subtitle,
 } from './styles';
+import { useCart } from 'src/hooks/useCart';
 
 interface NewWeekEventCardProps {
   title: string;
@@ -26,6 +28,7 @@ interface TicketProps {
 
 export default function CartTicketCard({ image, title, onPress, tickets, id }: NewWeekEventCardProps) {
   const [currentTickets, setCurrentTickets] = useState<Array<TicketProps>>([]);
+  const { deleteTicket } = useCart();
 
   const addTickets = (newTickets: any) => {
     const ticketsFormatteds = newTickets
@@ -41,14 +44,42 @@ export default function CartTicketCard({ image, title, onPress, tickets, id }: N
     const ticketsWithNewValuesAndQuantity = [...ticketsWithoutRepetition.values()]
     addTickets(ticketsWithNewValuesAndQuantity);
   }, [tickets]);
-
+  console.log("ID HERE", id)
 
   return (
     <Container key={id} onPress={onPress}>
       <InfoContent>
-        <Title>
-          {title}
-        </Title>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <Title>
+            {title}
+          </Title>
+          <TouchableOpacity
+            onPress={() => Alert.alert(
+              'Excluir Ingresso',
+              'Tem certeza que deseja excluir o ingresso do carrinho?',
+              [
+                {
+                  text: "Cancelar",
+                  onPress: () => {},
+                  style: "cancel"
+                },
+                {
+                  text: "OK",
+                  onPress: () => !!id ? deleteTicket(id) : {}
+                }
+              ]
+            )}
+            style={{
+              padding: 6
+            }}
+          >
+            <IconMaterial
+              name="delete-outline"
+              color={theme.color.blue_dark}
+              size={27}
+            />
+          </TouchableOpacity>
+        </View>
         <View style={{ marginTop: 10 }}>
           {
             currentTickets.length > 0
@@ -76,13 +107,13 @@ export default function CartTicketCard({ image, title, onPress, tickets, id }: N
             marginTop: 10
           }}
         />
-        <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-end", marginTop: 10}}>
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: "flex-end", marginTop: 10 }}>
           <Subtitle>
             Subtotal: {" "}{
               currentTickets
-                ?.reduce((total: number, ticket: TicketProps)=> total + ticket.value, 0)
-                ?.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })   
-              }
+                ?.reduce((total: number, ticket: TicketProps) => total + ticket.value, 0)
+                ?.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' })
+            }
             {/* ?.value?.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' }) */}
           </Subtitle>
         </View>

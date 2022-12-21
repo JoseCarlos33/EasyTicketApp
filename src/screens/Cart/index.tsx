@@ -41,10 +41,12 @@ function Cart({ navigation }: any) {
                   </ContentTitle>
                   {cart.map((cartItem, index) => {
                     const eventData = allEvents.filter(event => event.id === cartItem.productId)?.[0];
+                    console.log("EVENT", eventData)
 
                     return (
                       <View key={index}>
                         <CartTicketCard
+                          id={cartItem.productId}
                           image={eventData?.img}
                           title={eventData?.title}
                           onPress={() => navigation.navigate("EventDetail", {
