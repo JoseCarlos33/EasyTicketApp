@@ -25,6 +25,7 @@ const FavoriteContext = createContext({} as IFavoritesContextData);
 
 function FavoriteProvider({ children }: FavoritesProviderProps) {
   const [favorites, setFavorites] = useState<Array<number>>([]);
+  const favoritesStorageKey = '@easyTicket:favorites';
 
   function handleAddFavorites(productId: number) {
     console.log("CHEGOU", productId)
@@ -41,6 +42,30 @@ function FavoriteProvider({ children }: FavoritesProviderProps) {
   useEffect(() => {
     console.log("Favorites", favorites);
   }, [favorites])
+
+  useEffect(() => {
+    async function changeStorageData(): Promise<void> {
+      const favoritesFormatted = JSON.stringify(favorites);
+      await AsyncStorage.setItem(favoritesStorageKey, favoritesFormatted);
+    }
+
+    changeStorageData();
+  }, [favorites])
+
+
+  useEffect(() => {
+    async function loadStorageData(): Promise<void> {
+      const favorites = await AsyncStorage.getItem(favoritesStorageKey) ?? "{}";
+      const favoritesFormatted = JSON.parse(favorites);
+
+      if (favorites) {
+        setFavorites(favoritesFormatted);
+      }
+      console.log("favorites STORAGE",favoritesFormatted);
+    }
+
+    loadStorageData();
+  }, [])
 
   return (
     <FavoriteContext.Provider value={{

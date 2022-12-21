@@ -73,7 +73,7 @@ export default function DefaultEventCard({ image, title, day, onPress, type, id 
       <View>
         <IconButton onPress={toogleFavorite}>
           {
-            favorites?.includes(id) ? (
+            favorites?.includes(id) && signed ? (
               <IconMaterial name="favorite" color={'red'} size={27} />
             ) : (
               <IconMaterial name="favorite-border" color={theme.color.gray_dark} size={27} />

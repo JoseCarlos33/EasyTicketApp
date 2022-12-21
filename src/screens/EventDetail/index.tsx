@@ -101,7 +101,7 @@ export default function EventDetail({ route, navigation }: any) {
         </PageTitle>
         <IconButton onPress={toogleFavorite}>
           {
-            favorites?.includes(eventId) ? (
+            (favorites?.includes(eventId) && signed) ? (
               <IconMaterial name="favorite" color={'red'} size={27} />
             ) : (
               <IconMaterial name="favorite-border" color={theme.color.gray_dark} size={27} />
