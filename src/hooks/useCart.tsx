@@ -46,6 +46,17 @@ function CartProvider({ children }: TicketProviderProps) {
     setTotalTicketsValue(totalValue)
   }
 
+  function handleChangeTickets(tickets: any){
+    tickets.map((item: any, index: any) => {
+      if(index === 0){
+        setAllTickets([...item.tickets])
+      }
+      if(index !== 0){
+        setAllTickets(oldTickets => [...oldTickets, ...item.tickets])
+      }
+    })
+  }
+
   function handleChangeCart(product: CartProps) {
     const isSameProduct = cart.filter(item => item.productId === product.productId)?.[0]
     const cartWithoutFindProduct = cart.filter(item => item.productId !== product.productId)
@@ -56,15 +67,6 @@ function CartProvider({ children }: TicketProviderProps) {
 
     setCart(newProductsOrsTickets)
     Alert.alert('Produto adicionado ao carrinho com sucesso!');
-
-    newProductsOrsTickets.map((item, index) => {
-      if(index === 0){
-        setAllTickets([...item.tickets])
-      }
-      if(index !== 0){
-        setAllTickets(oldTickets => [...oldTickets, ...item.tickets])
-      }
-    })
   }
 
   function handleClearCart(){
@@ -79,6 +81,10 @@ function CartProvider({ children }: TicketProviderProps) {
   useEffect(() => {
     calculateTotalValue();
   }, [allTickets])
+
+  useEffect(() => {
+    handleChangeTickets(cart);
+  }, [cart])
 
   useEffect(() => {
     

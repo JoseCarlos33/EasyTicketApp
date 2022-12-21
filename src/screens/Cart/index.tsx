@@ -3,9 +3,10 @@ import { Alert, Image, ScrollView, View } from 'react-native';
 import HeaderNavigation from 'src/components/atoms/HeaderNavigation';
 import CartTicketCard from 'src/components/molecules/CartTicketCard';
 import { useCart } from 'src/hooks/useCart';
-import EmptyCart from '../EmptyCart';
+import EmptyCart from 'src/components/organisms/EmptyCart';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons'
 import MasterCardLogo from 'src/assets/images/mastercard.png';
+
 
 import {
   Container,
