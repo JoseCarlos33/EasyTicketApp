@@ -10,8 +10,8 @@ import { theme } from '@utils/theme';
 import EventsList from 'src/screens/EventsList';
 import EventDetail from 'src/screens/EventDetail';
 import Cart from 'src/screens/Cart';
-import EmptyCart from 'src/screens/EmptyCart';
 import Profile from 'src/screens/Profile';
+import FavoriteList from 'src/screens/FavoriteList';
 
 Icon.loadFont()
 IconMaterial.loadFont()
@@ -67,7 +67,7 @@ export function TapRoutes() {
       />
       <Tab.Screen
         name="Favoritos"
-        component={Test}
+        component={FavoriteList}
         options={{
           tabBarLabel: 'Favoritos',
           // tabBarColor: '#1f65ff',
