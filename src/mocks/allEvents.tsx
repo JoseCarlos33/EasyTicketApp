@@ -20,7 +20,7 @@ export const allEvents = [
   {
     id: 2,
     img: Img2,
-    title: "Como gerar mais resultados em grandes corporações",
+    title: "Como conduzir equipes para o resultado",
     day: "27/01/2023",
     type: "Empresarial",
     description: "Aprenda as melhores estratégias de usar essa poderosa ferramenta nos seus negócios",

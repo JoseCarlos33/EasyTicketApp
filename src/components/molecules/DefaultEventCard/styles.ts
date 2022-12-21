@@ -14,7 +14,7 @@ export const Container = styled.TouchableOpacity`
 
 export const ImageContent = styled.View`
   width: ${wp(30)}px;
-  height: ${hp(12)}px;  
+  height: ${hp(13)}px;  
   border-radius: 10px;
   margin-top: 2px;
   overflow: hidden;
