@@ -54,6 +54,7 @@ function AuthInputs({
       <ControlledInput
         name="password"
         label='Senha'
+        secureTextEntry
       />
       {
         !isSignInSelected && (

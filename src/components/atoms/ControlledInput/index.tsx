@@ -22,6 +22,7 @@ interface InputBaseProps {
   value?: any;
   animatedStyle?: any;
   hasError?: any;
+  secureTextEntry?: boolean;
 }
 
 function InputBase({
@@ -31,6 +32,7 @@ function InputBase({
   value,
   animatedStyle,
   hasError,
+  secureTextEntry
 }: InputBaseProps) {
   return (
     <InputContent style={[animatedStyle]}>
@@ -39,6 +41,7 @@ function InputBase({
         autoCapitalize={"none"}
         onChangeText={onChangeText}
         value={value}
+        secureTextEntry={secureTextEntry}
         style={{
           borderColor: hasError 
             ? theme.color.red 
@@ -69,6 +72,7 @@ export default function ControlledInput({
   label,
   name = "",
   animatedStyle,
+  secureTextEntry = false
 }: InputBaseProps) {
 
   const { control, formState: { errors } } = useFormContext();
@@ -91,6 +95,7 @@ export default function ControlledInput({
             animatedStyle={animatedStyle}
             name={name}
             hasError={hasError}
+            secureTextEntry={secureTextEntry}
           />
         )}
         name={name}
