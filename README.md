@@ -2,7 +2,7 @@
   Easy Tikcet App
 </h1>
 
-## Para Rodar Localmente o Projeto:
+## Para rodar localmente o projeto:
 
 **Instalação das dependencias:**
 ```sh
@@ -13,7 +13,7 @@
    npm i
 ```
 
-**Caso esteja em ambiente macOS rode os seguintes comandos:**
+**Caso esteja em ambiente macOS rode o seguinte comando:**
 ```sh
   cd ios && pod install
 ```
@@ -24,6 +24,11 @@
 ```
 ```sh
   yarn ios
+```
+
+**Inicializar Metro**
+```sh
+  yarn start 
 ```
 
 ### Features
